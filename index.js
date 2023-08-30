@@ -92,7 +92,10 @@ type Mutation{
 // The root provides a resolver function for each API endpoint
 
 var root = {
-  restaurant: (arg) => restaurants[arg.id],
+  restaurant: ({ id }) => {
+    let restaurant = restaurants.find(item => item.id === id);
+    return restaurant;
+  },
   restaurants: () => restaurants,
   setrestaurant: ({ input }) => {
     restaurants.push({name:input.name, description:input.description, dishes:input.dishes});
